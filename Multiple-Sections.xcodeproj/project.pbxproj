@@ -14,6 +14,7 @@
 		3E6B37AA250826E000106660 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E6B37A9250826E000106660 /* Assets.xcassets */; };
 		3E6B37AD250826E100106660 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E6B37AB250826E100106660 /* LaunchScreen.storyboard */; };
 		3E6B37B5250828B800106660 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6B37B4250828B800106660 /* LabelCell.swift */; };
+		3E6B37B72508332600106660 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6B37B62508332600106660 /* HeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		3E6B37AC250826E100106660 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3E6B37AE250826E100106660 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E6B37B4250828B800106660 /* LabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
+		3E6B37B62508332600106660 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				3E6B37A0250826D900106660 /* AppDelegate.swift */,
 				3E6B37A2250826D900106660 /* SceneDelegate.swift */,
 				3E6B37A4250826D900106660 /* ViewController.swift */,
+				3E6B37B62508332600106660 /* HeaderView.swift */,
 				3E6B37A6250826D900106660 /* Main.storyboard */,
 				3E6B37B4250828B800106660 /* LabelCell.swift */,
 				3E6B37A9250826E000106660 /* Assets.xcassets */,
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E6B37B72508332600106660 /* HeaderView.swift in Sources */,
 				3E6B37A5250826D900106660 /* ViewController.swift in Sources */,
 				3E6B37A1250826D900106660 /* AppDelegate.swift in Sources */,
 				3E6B37B5250828B800106660 /* LabelCell.swift in Sources */,

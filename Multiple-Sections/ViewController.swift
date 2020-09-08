@@ -49,6 +49,10 @@ class ViewController: UIViewController {
         
         collectionView.collectionViewLayout = createLayout()
         collectionView.backgroundColor = .systemBackground
+        
+        // 7
+        // register the supplementary HeaderView
+        collectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerView")
     }
     
     // 3
@@ -86,6 +90,12 @@ class ViewController: UIViewController {
             
             let section = NSCollectionLayoutSection(group: group)
             
+            // size options: .fraction, .absolute, .estimated - will start w/ value change on context
+            // configure the header view
+            let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+            let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+            section.boundarySupplementaryItems = [header]
+            
             return section
         }
         
@@ -106,11 +116,22 @@ class ViewController: UIViewController {
             if indexPath.section == 0 {
                 // first section
                 cell.backgroundColor = .systemOrange
+                cell.layer.cornerRadius = 12
             } else {
                 cell.backgroundColor = .systemGreen
             }
             return cell
         })
+        
+        // 3
+        dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) in
+            guard let headerView = self.collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerView", for: indexPath) as? HeaderView else {
+                fatalError("could not dequeu a HeaderView")
+            }
+            headerView.textLabel.text = "\(Section.allCases[indexPath.section])".capitalized
+            return headerView
+        }
+        
         // 2
         // setup initial snapshot
         var snapshot = NSDiffableDataSourceSnapshot<Section, Int>()
