@@ -35,6 +35,20 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureCollectionView()
+        configureDataSource()
+    }
+    
+    // 4
+    private func configureCollectionView() {
+        // overwrite the default layout from
+        // flow layout to compositional layout
+        
+        // if done programmatically
+        //collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
+        
+        collectionView.collectionViewLayout = createLayout()
+        collectionView.backgroundColor = .systemBackground
     }
     
     // 3
@@ -60,8 +74,8 @@ class ViewController: UIViewController {
             
             // item's container => group
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-            // TODO: add content insets for item
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
             
                 // dynamic with columns case, number of
             
@@ -78,6 +92,33 @@ class ViewController: UIViewController {
         return layout
     }
 
-
+    // 5
+    private func configureDataSource() {
+        // 1
+        // setting up the data source
+        dataSource = DataSource(collectionView: collectionView, cellProvider: { (collectionView, indexPath, item) -> UICollectionViewCell? in
+            // configure the cell
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "labelCell", for: indexPath) as? LabelCell else {
+                fatalError("could not dequeue a Label Cell")
+            }
+            cell.textLabel.text = "\(item)"
+            
+            if indexPath.section == 0 {
+                // first section
+                cell.backgroundColor = .systemOrange
+            } else {
+                cell.backgroundColor = .systemGreen
+            }
+            return cell
+        })
+        // 2
+        // setup initial snapshot
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Int>()
+        snapshot.appendSections([.grid, .single])
+        // careful for duplicate items, thats y it's hashable
+        snapshot.appendItems(Array(1...12), toSection: .grid)
+        snapshot.appendItems(Array(13...20), toSection: .single)
+        dataSource.apply(snapshot, animatingDifferences: false)
+    }
 }
 
